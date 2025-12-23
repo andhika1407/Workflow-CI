@@ -10,9 +10,8 @@ if __name__ == "__main__":
   lstm_units = int(sys.argv[1]) if len(sys.argv) > 1 else 30
   dense_units = int(sys.argv[2]) if len(sys.argv) > 2 else 30
 
-  train_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "NVDA_Stock_Preprocessing/train_set")
-  test_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "NVDA_Stock_Preprocessing/test_set")
-  
+  train_path = os.environ.get("TRAIN_PATH")
+  test_path = os.environ.get("TEST_PATH")
   with mlflow.start_run():
     mlflow.log_param("window_size", 60)
     mlflow.log_param("lstm_units", lstm_units)
