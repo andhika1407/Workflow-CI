@@ -43,7 +43,7 @@ jobs:
       # Run as a mlflow project
       - name: Run mlflow project
         run: |
-          mlflow run MLProject --env-manager=local 
+          python3 MLProject/modelling.py 60 60
 
       - name: Get latest MLflow run_id
         run: |
