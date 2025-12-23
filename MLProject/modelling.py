@@ -26,6 +26,9 @@ if __name__ == "__main__":
               optimizer=optimizer,
               metrics=["mae"])
 
+  
+  mlflow.set_tracking_uri(f"file://{os.getcwd()}/mlruns")
+
   with mlflow.start_run():
     mlflow.log_param("window_size", 60)
     mlflow.log_param("lstm_units", lstm_units)
