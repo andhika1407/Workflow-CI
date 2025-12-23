@@ -54,18 +54,23 @@ jobs:
       - name: Build Docker Model
         run: |
           mlflow models build-docker --model-uri "runs:/$RUN_ID/lstm_model" --name "cc"
- 
-      # Save models to GitHub Repository
-      # - name: Save mlruns to repo
-      #   run: |
-      #     git config --global user.name ${{ secrets.username }}
-      #     git config --global user.email ${{ secrets.email }}
-      #     git add mlruns/
-      #     git commit -m "Save mlruns from CI run"
-      #     git push origin master
 
       - name: Upload mlruns
         uses: actions/upload-artifact@v4
         with:
           name: mlruns
           path: mlruns/
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+
+      - name: Tag Docker Image
+        run: |
+          docker tag lstm_model ${{ secrets.DOCKER_HUB_USERNAME }}/lstm_model:latest
+      
+      - name: Push Docker Image
+        run: |
+          docker push ${{ secrets.DOCKER_HUB_USERNAME }}/lstm_model:latest
