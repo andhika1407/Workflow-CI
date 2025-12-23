@@ -1,4 +1,4 @@
-name: mlflow-nvda-lstms
+name: mlflow-nvda-lstm
 
 conda_env: conda.yaml
 

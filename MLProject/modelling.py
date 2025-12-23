@@ -13,6 +13,8 @@ if __name__ == "__main__":
   train_path = os.environ.get("TRAIN_PATH")
   test_path = os.environ.get("TEST_PATH")
   
+  os.environ.pop("MLFLOW_RUN_ID", None)
+
   with mlflow.start_run():
     mlflow.log_param("window_size", 60)
     mlflow.log_param("lstm_units", lstm_units)
