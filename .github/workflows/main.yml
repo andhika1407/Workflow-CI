@@ -9,8 +9,8 @@ on:
       - master
  
 env:
-  TRAIN_PATH: "NVDA_Stock_Preprocessing/train_set"
-  TEST_PATH: "NVDA_Stock_Preprocessing/test_set"
+  TRAIN_PATH: "MLproject/NVDA_Stock_Preprocessing/train_set"
+  TEST_PATH: "MLproject/NVDA_Stock_Preprocessing/test_set"
   MLFLOW_TRACKING_URI: "file://${{ github.workspace }}/mlruns"
  
 jobs:
