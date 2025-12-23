@@ -32,17 +32,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install mlflow
           pip install tensorflow
-      
-      # Clear run_id so it didn't conflict with internal mlflow run
-      - name: Clear MLflow env
-        run: |
-          unset MLFLOW_RUN_ID
-          unset MLFLOW_EXPERIMENT_ID
 
       # Run as a mlflow project
       - name: Run mlflow project
         run: |
-          mlflow run MLProject --env-manager=local
+          python MLProject/modelling.py 30 30
 
       - name: Get latest MLflow run_id
         run: |
