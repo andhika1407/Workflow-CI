@@ -13,23 +13,7 @@ if __name__ == "__main__":
   train_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "NVDA_Stock_Preprocessing/train_set")
   test_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "NVDA_Stock_Preprocessing/test_set")
   
-  model = tf.keras.models.Sequential([
-      tf.keras.layers.LSTM(lstm_units, input_shape=(60,1), return_sequences=True),
-      tf.keras.layers.LSTM(lstm_units),
-      tf.keras.layers.Dense(dense_units, activation="relu"),
-      tf.keras.layers.Dense(1),
-    ])
-
-  optimizer = tf.keras.optimizers.Adam(learning_rate=1.0000e-03)
-
-  model.compile(loss=tf.keras.losses.Huber(),
-              optimizer=optimizer,
-              metrics=["mae"])
-
-  
-  mlflow.set_tracking_uri(f"file://{os.getcwd()}/mlruns")
-
-  with mlflow.start_run(nested=True):
+  with mlflow.start_run():
     mlflow.log_param("window_size", 60)
     mlflow.log_param("lstm_units", lstm_units)
     mlflow.log_param("num_lstm_layers", 2)
@@ -38,6 +22,19 @@ if __name__ == "__main__":
 
     train_set = tf.data.Dataset.load(train_path)
     test_set = tf.data.Dataset.load(test_path)
+
+    model = tf.keras.models.Sequential([
+      tf.keras.layers.LSTM(lstm_units, input_shape=(60,1), return_sequences=True),
+      tf.keras.layers.LSTM(lstm_units),
+      tf.keras.layers.Dense(dense_units, activation="relu"),
+      tf.keras.layers.Dense(1),
+    ])
+
+    optimizer = tf.keras.optimizers.Adam(learning_rate=1.0000e-03)
+
+    model.compile(loss=tf.keras.losses.Huber(),
+                optimizer=optimizer,
+                metrics=["mae"])
 
     history = model.fit(train_set, 
                         validation_data=test_set,
