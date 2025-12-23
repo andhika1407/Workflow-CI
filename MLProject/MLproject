@@ -1,0 +1,10 @@
+name: mlflow-nvda-lstms
+
+conda_env: conda.yaml
+
+entry_points:
+  main:
+    parameters:
+      lstm_units: {type: int, default: 30}
+      dense_units: {type: int, default: 30}
+    command: "python3 modelling.py {lstm_units} {dense_units}"
