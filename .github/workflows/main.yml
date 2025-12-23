@@ -53,7 +53,7 @@ jobs:
 
       - name: Build Docker Model
         run: |
-          mlflow models build-docker --model-uri "runs:/$RUN_ID/model" --name "cc"
+          mlflow models build-docker --model-uri "runs:/$RUN_ID/lstm_model" --name "cc"
  
       # Save models to GitHub Repository
       # - name: Save mlruns to repo
