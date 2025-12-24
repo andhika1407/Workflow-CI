@@ -9,8 +9,8 @@ on:
       - master
  
 env:
-  TRAIN_PATH: "MLProject/NVDA_Stock_Preprocessing/train_set"
-  TEST_PATH: "MLProject/NVDA_Stock_Preprocessing/test_set"
+  TRAIN_PATH: "NVDA_Stock_Preprocessing/train_set"
+  TEST_PATH: "NVDA_Stock_Preprocessing/test_set"
   MLFLOW_TRACKING_URI: "file://${{ github.workspace }}/mlruns"
  
 jobs:
@@ -27,18 +27,11 @@ jobs:
         with:
           python-version: "3.12.7"
  
-      # Check Env Variables
-      # - name: Check Env
-      #   run: |
-      #     echo $TRAIN_PATH
-      #     echo $TEST_PATH
-
-      - name: Debug paths
+      Check Env Variables
+      - name: Check Env
         run: |
-          pwd
-          ls
-          ls MLProject || echo "MLProject does NOT exist"
-          ls MLproject || echo "MLproject does NOT exist"
+          echo $TRAIN_PATH
+          echo $TEST_PATH
 
       # Install mlflow
       - name: Install dependencies
