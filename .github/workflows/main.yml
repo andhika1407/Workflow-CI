@@ -27,7 +27,7 @@ jobs:
         with:
           python-version: "3.12.7"
  
-      Check Env Variables
+      #Check Env Variables
       - name: Check Env
         run: |
           echo $TRAIN_PATH
